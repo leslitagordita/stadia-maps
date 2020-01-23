@@ -1,0 +1,460 @@
+<html>
+<head>
+    <title>GeoJSON + Flask + Stadia Maps</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.52.0/mapbox-gl.js"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.52.0/mapbox-gl.css" rel="stylesheet" />
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+
+            #map {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              width: 100%;
+            }
+        /* We recommend using an icon that is 2x the intended display size, so that it renders nicely on retina displays. */
+        .marker {
+            /* The following icon is owned by Stadia Maps. While you maintain an account with us, we grant you royalty-free use of
+             * this image when displayed on our maps.
+             */
+            background-image: url('data:image/png;base64,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');
+            background-size: cover;
+            width: 27px;
+            height: 42px;
+            cursor: pointer;
+        }
+        </style>
+      <meta id="my-data" data-name="{{ street_trees_points }}">
+</head>
+<body>
+    <h1>
+        Let's display some nice maps here!
+    </h1>
+      <p>{{ street_trees_points }}</p>
+  <div id="map"></div>
+    <script>
+     var map = new mapboxgl.Map({
+       container: 'map',
+       style: 'https://tiles.stadiamaps.com/styles/alidade_smooth.json',  // Theme URL; see our themes documentation for more options
+       center: [-75.165222, 39.952583],  // Initial focus coordinate
+       zoom: 10
+     });
+
+     // Mapbox GL JS has a bug in it's handling of RTL, so we have to grab this dependency as well until they
+     // combine it with the main library
+     mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.1/mapbox-gl-rtl-text.js');
+
+     // Add zoom and rotation controls to the map.
+     map.addControl(new mapboxgl.NavigationControl());
+
+   // var collection = db.collection('streetTrees');
+
+//    var markerCollection = {
+//   "type": "FeatureCollection",
+//   "features": [
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2001,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14580902038327,
+//           40.050975658242315
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2002,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14542653758554,
+//           40.050921340780775
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2003,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14533056756486,
+//           40.051130071773166
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2004,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14482903899463,
+//           40.05097183543528
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2005,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14477112528698,
+//           40.05083790384436
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2006,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14457647145929,
+//           40.05081219831997
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2007,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14450851000987,
+//           40.050802540602696
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2008,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.1444777216824,
+//           40.05092695060678
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2009,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14433797321286,
+//           40.0509106495578
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2010,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14443578366891,
+//           40.05079312977602
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2011,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14436442985067,
+//           40.05078498172628
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2012,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.1433389004055,
+//           40.05077975084514
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2013,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14322864464599,
+//           40.05076541869458
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2014,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14315008376937,
+//           40.050755231329475
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2015,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14323205590115,
+//           40.05063793879138
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2016,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14317903041501,
+//           40.05063801772445
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2017,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14297153626242,
+//           40.05060275290429
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2018,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14288393209134,
+//           40.05059190691616
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2019,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14262653534999,
+//           40.05055838951883
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 2020,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.14247404009905,
+//           40.05053857932806
+//         ]
+//       }
+//     },
+//     {
+//       "type": "Feature",
+//       "properties": {
+//         "OBJECTID": 33052,
+//         "SPECIES": null,
+//         "STATUS": null,
+//         "DBH": null
+//       },
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -75.1448678536645,
+//           39.94211472103887
+//         ]
+//       }
+//     }
+//   ]
+// }
+
+     var mongoData = $('#my-data').data();
+     //console.log(mongoData);
+     //mongoData.slice(2);
+     var geoData = mongoData.name[0];
+     var dataToJson = JSON.stringify(geoData);
+     //console.log(dataToJson);
+     //delete dataToJson.name;
+     //dataToJson.slice(0);
+     //var key = "name";
+     //delete dataToJson[key];
+     //console.log('TO JSON' + parsedJSON);
+     //var markerCollection = $('#my-data').data();
+     var storeCollection = dataToJson;
+     var markerCollection = mongoData.name[0];
+     console.log(storeCollection);
+     //var markerCollection = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"OBJECTID":2001,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14580902038327,40.050975658242315]}},{"type":"Feature","properties":{"OBJECTID":2002,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14542653758554,40.050921340780775]}},{"type":"Feature","properties":{"OBJECTID":2003,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14533056756486,40.051130071773166]}},{"type":"Feature","properties":{"OBJECTID":2004,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14482903899463,40.05097183543528]}},{"type":"Feature","properties":{"OBJECTID":2005,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14477112528698,40.05083790384436]}},{"type":"Feature","properties":{"OBJECTID":2006,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14457647145929,40.05081219831997]}},{"type":"Feature","properties":{"OBJECTID":2007,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14450851000987,40.050802540602696]}},{"type":"Feature","properties":{"OBJECTID":2008,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.1444777216824,40.05092695060678]}},{"type":"Feature","properties":{"OBJECTID":2009,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14433797321286,40.0509106495578]}},{"type":"Feature","properties":{"OBJECTID":2010,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14443578366891,40.05079312977602]}},{"type":"Feature","properties":{"OBJECTID":2011,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14436442985067,40.05078498172628]}},{"type":"Feature","properties":{"OBJECTID":2012,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.1433389004055,40.05077975084514]}},{"type":"Feature","properties":{"OBJECTID":2013,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14322864464599,40.05076541869458]}},{"type":"Feature","properties":{"OBJECTID":2014,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14315008376937,40.050755231329475]}},{"type":"Feature","properties":{"OBJECTID":2015,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14323205590115,40.05063793879138]}},{"type":"Feature","properties":{"OBJECTID":2016,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14317903041501,40.05063801772445]}},{"type":"Feature","properties":{"OBJECTID":2017,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14297153626242,40.05060275290429]}},{"type":"Feature","properties":{"OBJECTID":2018,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14288393209134,40.05059190691616]}},{"type":"Feature","properties":{"OBJECTID":2019,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14262653534999,40.05055838951883]}},{"type":"Feature","properties":{"OBJECTID":2020,"SPECIES":null,"STATUS":null,"DBH":null},"geometry":{"type":"Point","coordinates":[-75.14247404009905,40.05053857932806]}}]}
+
+     console.log(markerCollection);
+
+     //var markerCollection = {
+     //       "type": "FeatureCollection",
+     //       "features": [{
+     //           "type": "Feature",
+     //           "geometry": {
+     //               "type": "Point",
+     //               // NOTE: in GeoJSON notation, LONGITUDE comes first. GeoJSON
+     //               // uses x, y coordinate notation, just like you used to describe
+     //               // graph coordinates in high school. What you may not realize is
+     //               // that latitude, often said first in English, is actually the y axis.
+     //               "coordinates": [-75.165222, 39.952583]
+     //           },
+     //           "properties": {
+     //               "title": "Nürburgring"
+     //           }
+     //       }]
+     //   };
+        // Next, we can add markers to the map
+        markerCollection.features.forEach(function(point) {
+            // Since these are HTML markers, we create a DOM element first, which we will later
+            // pass to the Marker constructor.
+            var elem = document.createElement('div');
+            elem.className = 'marker';
+
+            // Now, we construct a marker and set it's coordinates from the GeoJSON. Note the coordinate order.
+            var marker = new mapboxgl.Marker(elem);
+            marker.setLngLat(point.geometry.coordinates);
+
+            // You can also create a popup that gets shown when you click on a marker. You can style this using
+            // CSS as well if you so desire. A minimal example is shown. The offset will depend on the height of your image.
+            var popup = new mapboxgl.Popup({ offset: 24, closeButton: false });
+            popup.setHTML('<div>' + point.properties.title + '</div>');
+
+            // Set the marker's popup.
+            marker.setPopup(popup);
+
+            // Finally, we add the marker to the map.
+            marker.addTo(map);
+        });
+    </script>
+</body>
+</html>
