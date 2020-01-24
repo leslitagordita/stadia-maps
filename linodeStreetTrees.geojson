@@ -4,7 +4,7 @@
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46036,
+        "OBJECTID": 36391,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -12,15 +12,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.2065677255496,
-          39.95226953964083
+          -75.14457809997165,
+          39.95216128175947
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46037,
+        "OBJECTID": 36392,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -28,15 +28,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.20649261889868,
-          39.95222101046862
+          -75.14446882894926,
+          39.95213340459382
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46038,
+        "OBJECTID": 36388,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -44,15 +44,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.20670459941512,
-          39.95213900947714
+          -75.14436203227342,
+          39.95213350981046
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46039,
+        "OBJECTID": 36387,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -60,15 +60,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.20710820557262,
-          39.95218830024204
+          -75.14391916318196,
+          39.95207850652248
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46040,
+        "OBJECTID": 36385,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -76,15 +76,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.207260049858,
-          39.95219728201855
+          -75.14371036845057,
+          39.95207848246513
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46041,
+        "OBJECTID": 34552,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -92,15 +92,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.2074538424068,
-          39.952232443962494
+          -75.14525481375121,
+          39.952402827669786
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46042,
+        "OBJECTID": 34553,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -108,15 +108,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.20743216254169,
-          39.95235584963505
+          -75.14522060144313,
+          39.95249257200717
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46043,
+        "OBJECTID": 34554,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -124,15 +124,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.20730200662102,
-          39.95236441923723
+          -75.14521115802674,
+          39.95254397352744
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "OBJECTID": 46044,
+        "OBJECTID": 34556,
         "SPECIES": null,
         "STATUS": null,
         "DBH": null
@@ -140,264 +140,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -75.20756184864854,
-          39.95235789500779
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46045,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20764376592003,
-          39.95225164865202
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46046,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.2077653625553,
-          39.95227123725571
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46047,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20779081097989,
-          39.95239820028874
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46048,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20796165389143,
-          39.95243235091044
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46049,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20798682717255,
-          39.9522961841732
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46050,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20811553056532,
-          39.95231341698351
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46051,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20810732436905,
-          39.95242765806886
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46052,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20821605267598,
-          39.95246474595041
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46053,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20837081733404,
-          39.952342813003774
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46054,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20830866593761,
-          39.952319033423194
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46055,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.2083142701879,
-          39.95251254172915
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46056,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20846213153341,
-          39.95234145644952
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46057,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20861800247542,
-          39.952511383529846
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46058,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20846659595445,
-          39.952535746784214
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46059,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20882795705965,
-          39.95239807797266
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "OBJECTID": 46060,
-        "SPECIES": null,
-        "STATUS": null,
-        "DBH": null
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.20885898020308,
-          39.95254363387634
+          -75.14507538603768,
+          39.952630343085694
         ]
       }
     }
